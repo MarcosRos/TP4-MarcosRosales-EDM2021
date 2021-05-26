@@ -1,32 +1,28 @@
-package ar.unju.edu.edm.service;
+package ar.unju.edu.edm.service.imp;
 
 import java.util.ArrayList;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import ar.unju.edu.edm.model.Producto;
+import ar.unju.edu.edm.repository.IProductoDAO;
+import ar.unju.edu.edm.service.ProductoService;
 
 @Service
-public class ProductoServiceIMP implements ProductoService{
-	
-	private static final Log LOGGER = LogFactory.getLog(ProductoServiceIMP.class);
-	
+@Qualifier("impprodmysql")
+public class ProductoServiceMySQL implements ProductoService{
+
 	@Autowired
 	Producto unProducto;
 	
-	ArrayList<Producto> listaDeProductos = new ArrayList<Producto>();
-	
+	@Autowired
+	IProductoDAO productoDAO;
 	@Override
 	public void guardarProducto(Producto unProducto) {
 		// TODO Auto-generated method stub
-		System.out.println(unProducto.getNombre());
-		listaDeProductos.add(unProducto);
-		System.out.println(listaDeProductos.size());
-		LOGGER.info("METHOD: ingresando a Guardar Producto");
-		LOGGER.info("RESULT: guardado " + listaDeProductos.get(listaDeProductos.size()-1).getNombre());
+		productoDAO.save(unProducto);
 	}
 
 	@Override
@@ -42,15 +38,15 @@ public class ProductoServiceIMP implements ProductoService{
 	}
 
 	@Override
-	public Producto obtenerUnProducto(String nombreProducto) {
+	public Producto obtenerUnProducto(Integer id) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return productoDAO.findById(id).orElseThrow(()->new Exception("El producto NO existe"));
 	}
 
 	@Override
 	public ArrayList<Producto> obtenerTodosProductos() {
 		// TODO Auto-generated method stub
-		return listaDeProductos;
+		return (ArrayList<Producto>) productoDAO.findAll();
 	}
 
 	@Override
@@ -62,9 +58,7 @@ public class ProductoServiceIMP implements ProductoService{
 	@Override
 	public Producto obtenerUltimoProducto() {
 		// TODO Auto-generated method stub
-		int i = listaDeProductos.size() - 1;
-		return listaDeProductos.get(i);
+		return null;
 	}
-	
 
 }

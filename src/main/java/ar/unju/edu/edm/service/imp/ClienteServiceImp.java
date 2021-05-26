@@ -10,10 +10,10 @@ import ar.unju.edu.edm.util.ListadoClientes;
 
 @Service
 @Qualifier("unImp")
-public class ClienteServiceImp implements IClienteService{
-	
+public class ClienteServiceImp implements IClienteService {
+
 	private List<Cliente> listadoClientes = ListadoClientes.clientes;
-	
+
 	@Autowired
 	Cliente unCliente;
 
@@ -30,9 +30,50 @@ public class ClienteServiceImp implements IClienteService{
 	}
 
 	@Override
+	public Cliente encontrarUnCliente(int dni) throws Exception {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < listadoClientes.size(); i++) {
+			if (listadoClientes.get(i).getNroDocumento() == dni) {
+				unCliente = listadoClientes.get(i);
+			}
+		}
+		return unCliente;
+	}
+
+	@Override
+	public void modificarCliente(Cliente clienteModificado) throws Exception {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < listadoClientes.size(); i++) {
+			if (listadoClientes.get(i).getNroDocumento() == clienteModificado.getNroDocumento()) {
+				listadoClientes.set(i, clienteModificado);
+			}
+		}
+	}
+
+	@Override
+	public void eliminarCliente(int dni) throws Exception {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < listadoClientes.size(); i++) {
+			if (listadoClientes.get(i).getNroDocumento() == dni) {
+				listadoClientes.remove(i);
+			}
+		}
+	}
+
+	@Override
 	public List<Cliente> obtenerTodosClientes() {
 		// TODO Auto-generated method stub
 		return listadoClientes;
 	}
-}
 
+	@Override
+	public Cliente encontrarUnClienteId(int id) throws Exception {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < listadoClientes.size(); i++) {
+			if (listadoClientes.get(i).getIdCliente() == id) {
+				unCliente = listadoClientes.get(i);
+			}
+		}
+		return unCliente;
+	}
+}

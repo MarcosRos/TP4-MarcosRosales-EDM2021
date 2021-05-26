@@ -55,7 +55,7 @@ form button[type="submit"] {
 	background-color: #000;
 }
 
-.lista td {
+td {
 	background-color: black;
 	color: white;
 }
@@ -91,3 +91,11 @@ form button[type="submit"] {
 .lista{
 	overflow-x:scroll;
 }
+
+.columna 
+	{ 
+ 	position: sticky;
+ 	left: 0;
+ 	background: #800000; 	 
+}
+
