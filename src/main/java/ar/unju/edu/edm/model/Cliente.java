@@ -42,9 +42,9 @@ public class Cliente {
 	/*@Column
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaUltimCompra;
-	
+	*/
 	@Column
-	private String password;*/
+	private String password;
 	
 	@Column
 	private String tipoDocumento;
@@ -150,14 +150,14 @@ public class Cliente {
 		Period periodo = Period.between(fechaUltimCompra, fechaActual);
 		return " T.D.U.C.  Año: " + periodo.getYears() + " Mes: " + periodo.getMonths() + " Dia: " + periodo.getDays();
 	}
-	
+	*/
 	public String getPassword() {
 		return password;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
-	}*/
+	}
 	
 	public String gettNac() {
 		LocalDate fechaActual = LocalDate.now();

@@ -9,15 +9,12 @@ import ar.unju.edu.edm.model.Home;
 
 @Controller
 public class HomeController {
-	  
+
 	@Autowired
 	Home unHome;
-    
-@GetMapping({"/home"})
+
+	@GetMapping({ "/", "/login", "/home", "/index", "/login?error=true" })
 	public String cargarHome(Model model) {
-				
-		model.addAttribute("home", unHome);
 		return "home";
 	}
-
 }
