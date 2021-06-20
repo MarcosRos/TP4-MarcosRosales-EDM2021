@@ -1,6 +1,14 @@
 <!DOCTYPE html>
-<html>
-
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+	crossorigin="anonymous">
+<link th:rel="stylesheet"
+	th:href="@{/webjars/font-awesome/5.11.2/css/all.css} " />
+</head>
 <div class="modal-header">
 	<h5 class="modal-title" id="editarModalTitulo">Comprar</h5>
 	<button type="button" class="close" data-dismiss="modal"
@@ -9,27 +17,27 @@
 	</button>
 </div>
 <div class="modal-body">
-	<form id="formProducto" th:object="${productoSeleccionado}" th:action="@{/producto/guardarCompra}"
-		method="post">
+	<form id="formProducto" th:object="${venta}"
+		th:action="@{/producto/vender}" method="post">
 		<div class="form-group row">
 			<label for="numdoc" class="col-sm-2 col-form-label">Codigo</label>
 			<div class="col-sm-10">
-				<input type="number" id="numdoc" th:field="*{codProducto}"
+				<input type="number" id="numdoc" th:field="*{producto.codProducto}"
 					class="form-control">
 			</div>
 			<label for="numdoc" class="col-sm-2 col-form-label">Nombre</label>
 			<div class="col-sm-10">
-				<input type="text" id="numdoc" th:field="*{nombre}"
+				<input type="text" id="numdoc" th:field="*{producto.nombre}"
 					class="form-control">
 			</div>
 			<label for="numdoc" class="col-sm-2 col-form-label">Precio</label>
 			<div class="col-sm-10">
-				<input type="number" id="numdoc" th:field="*{precio}"
+				<input type="number" id="numdoc" th:field="*{producto.precio}"
 					class="form-control">
 			</div>
 			<label for="cantidad" class="col-sm-2 col-form-label">Cantidad</label>
 			<div class="col-sm-10">
-				<input type="number" id="cantidad" class="form-control">
+				<input type="number" id="cantidad" class="form-control" th:field="*{cantProductos}">
 			</div>
 			<label for="cantidad" class="col-sm-2 col-form-label">Cliente</label>
 			<div class="col-sm-10">
@@ -38,13 +46,14 @@
 		</div>
 		<div class="modal-footer">
 			<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-			<button type="submit" class="btn btn-primary">Confirmar
-				Compra</button>
+			<input type="submit" class="btn btn-primary" th:value="'Confirmar Compra'">
 		</div>
 
 
 	</form>
 </div>
+<script src="https://kit.fontawesome.com/3a8a3eef38.js"
+	crossorigin="anonymous"></script>
 
 
 </body>

@@ -47,9 +47,9 @@ public class ClienteServiceMySQL implements IClienteService{
 	}
 
 	@Override
-	public void eliminarCliente(int dni) throws Exception {
+	public void eliminarCliente(int id) throws Exception {
 		// TODO Auto-generated method stub
-		clienteDAO.deleteByNroDocumento(dni);;
+		clienteDAO.deleteById(id);;
 	}
 
 	@Override
@@ -59,16 +59,24 @@ public class ClienteServiceMySQL implements IClienteService{
 	}
 
 	@Override
-	public void modificarCliente(Cliente unCliente) throws Exception {
+	public void modificarCliente(Cliente clienteModificado) throws Exception{
 		// TODO Auto-generated method stub
-		/*clienteAModificar.setNombre(clienteModificado.getNombre());
-			clienteAModificar.setCodigoAreaTelefono(clienteModificado.getCodigoAreaTelefono());
-			clienteAModificar.setEmail(clienteModificado.getEmail());
-			clienteAModificar.setFechaNacimiento(clienteModificado.getFechaNacimiento());
-			clienteAModificar.setNroDocumento(clienteModificado.getNroDocumento());
-			clienteAModificar.setNumTelefono(clienteModificado.getNumTelefono());
-			clienteAModificar.setTipoDocumento(clienteModificado.getTipoDocumento());*/
+				Cliente clienteAModificar = clienteDAO.findById(clienteModificado.getIdCliente()).orElseThrow(()->new Exception("El Cliente no fue encontrado"));
+				cambiarCliente(clienteModificado, clienteAModificar);
+				
+				//vuelve el cliente en la BD ya modificado y se guarda
+				clienteDAO.save(clienteAModificar);
 	}
-
+	private void cambiarCliente(Cliente desde, Cliente hacia) {
+		//observen que vamos a pasar todos los atributos del cliente que viene, hacia el cliente que ya está en la BD
+		hacia.setNroDocumento(desde.getNroDocumento());
+		hacia.setNombre(desde.getNombre());
+		hacia.setTipoDocumento(desde.getTipoDocumento());
+		hacia.setFechaNacimiento(desde.getFechaNacimiento());
+		hacia.setCodigoAreaTelefono(desde.getCodigoAreaTelefono());
+		hacia.setNumTelefono(desde.getNumTelefono());
+		hacia.setEmail(desde.getEmail());
+		//observen que NO se ha cambiado el id, ya que ese atributo no debería permitirse cambiar
+	}
 	
 }

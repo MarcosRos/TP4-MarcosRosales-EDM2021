@@ -48,11 +48,11 @@ public class ClienteController {
 		}
 	}
 	
-	@GetMapping("/cliente/editar/{nroDocumento}")
-	public String editarCliente(Model model, @PathVariable(name="nroDocumento") int dni) throws Exception {		
+	@GetMapping("/cliente/editar/{idCliente}")
+	public String editarCliente(Model model, @PathVariable(name="idCliente") int id) throws Exception {		
 		try {
 			LOGGER.info("METHOD: ingresando editar modificar, antes de traer el Cliente");
-			Cliente clienteEncontrado = clienteService.encontrarUnCliente(dni);
+			Cliente clienteEncontrado = clienteService.encontrarUnClienteId(id);
 			LOGGER.info("METHOD: ingresando editar modificar, traje el Cliente"+clienteEncontrado.getNroDocumento());
 			model.addAttribute("unCliente", clienteEncontrado);	
 			model.addAttribute("editMode", "true");
@@ -103,8 +103,8 @@ public class ClienteController {
 		return "redirect:/cliente/mostrar";
 	}
 	
-	@GetMapping("/cliente/eliminarCliente/{id}")
-	public String eliminarCliente(Model model, @PathVariable(name="id") int id) {
+	@GetMapping("/cliente/eliminarCliente/{idCliente}")
+	public String eliminarCliente(Model model, @PathVariable(name="idCliente") int id) {
 		LOGGER.info("METHOD: ingresando el metodo Eliminar");
 		try {
 			clienteService.eliminarCliente(id);			
@@ -121,4 +121,9 @@ public class ClienteController {
 		model.addAttribute("clientes", clienteService.obtenerTodosClientes());
 		return("venta");
 	}
+	@GetMapping("/mostrar")
+	public String mostrar(Model model) {
+		return("NewFile");
+	}
+	
 }

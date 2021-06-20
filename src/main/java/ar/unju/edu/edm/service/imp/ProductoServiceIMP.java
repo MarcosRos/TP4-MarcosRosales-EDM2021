@@ -32,11 +32,11 @@ public class ProductoServiceIMP implements ProductoService{
 		
 	}
 
-	@Override
+	/*@Override
 	public void eliminarProducto(Producto productoAEliminar) {
 		// TODO Auto-generated method stub
 		
-	}
+	}*/
 
 	@Override
 	public Producto obtenerUnProducto(Integer codProducto) {
@@ -61,6 +61,24 @@ public class ProductoServiceIMP implements ProductoService{
 		// TODO Auto-generated method stub
 		int i = listaDeProductos.size() - 1;
 		return listaDeProductos.get(i);
+	}
+
+	@Override
+	public Producto obtenerCodigoProducto(Integer codigo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void eliminarProducto(int codigo) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Producto encontrarUnProducto(int codigo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
